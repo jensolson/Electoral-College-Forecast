@@ -1,16 +1,6 @@
 # Electoral-College-Forecast
-Forecasting US presidential election outcomes based on individual state betting markets
+Forecast the 2020 US presidential election outcome based on individual state betting markets from PredictIt. Makes use of Daniel Kovtun's rpredictit wrapper found here:
+https://github.com/danielkovtun/rpredictit
 
-# Kelly-Criterion-optimal-betting
-Calculates Kelly Criterion optimal bet size given vectors of probabilities and payoffs
+![Democratic electoral vote outcomes based on aggregated state-by-state prediction markets as of June 15, 2020, 10am Eastern time.](https://github.com/jensolson/Electoral-College-Forecast/blob/master/EV%20forecast.png)
 
-In the example shown, a given investment strategy has the following payoffs:
-* 10% probability of a 40% loss
-* 20% probability of a 20% loss
-* 30% probability of no net profit/loss
-* 20% probability of a 25% gain
-* 20% probability of a 45% gain
-
-Given repeated bets, optimal Kelly Criterion betting is to bet 81% of your bankroll (see chart).
-
-![Kelly Criterion optimal betting](https://github.com/jensolson/Kelly-Criterion-optimal-betting/blob/master/Kelly%20betting.png)
