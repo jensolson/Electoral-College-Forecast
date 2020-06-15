@@ -145,7 +145,8 @@ hist(results, col="gray", border=F,
                 "Democratic win probability:",
                 round(sum(results>=270)/nTrials,3),"\n",
                 "Median Democratic electoral votes:", median(results)),
-     xlab="Democratic electoral votes",
+     xlab=paste("Democratic electoral votes\n",
+                "(run", format(Sys.time(), "%a %b %d %Y %X"), "UTC)"),
      ylab="Frequency",
      breaks=25)
 
