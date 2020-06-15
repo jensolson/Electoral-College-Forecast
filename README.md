@@ -1,4 +1,4 @@
-# Electoral-College-Forecast
+# Electoral College Forecast
 Forecast the 2020 US presidential election outcome based on individual state betting markets from PredictIt. Makes use of Daniel Kovtun's [rpredictit wrapper](https://github.com/danielkovtun/rpredictit). 
 
 Current electoral college vote counts per [270 to Win](https://www.270towin.com/).
