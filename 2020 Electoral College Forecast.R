@@ -1,8 +1,11 @@
+# Jens Olson
+# jens.olson@gmail.com
+
 library(rpredictit)
 set.seed(5)
 
-# Uncomment to download current PredictIt market data
-# markets <- data.frame(all_markets())
+# Comment the line below once 'markets' variable has been stored to run additional analysis
+markets <- data.frame(all_markets())
 
 # Store variables, PredictIt IDs,
 # electoral votes, and population
