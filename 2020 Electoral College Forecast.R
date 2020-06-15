@@ -68,11 +68,9 @@ colnames(d) <- c("State", "ID", "EVs", "Population")
 
 # Functions to get Dem and Repub win probabilities from market data
 getDemProb <- function(betID) {
-  if (markets[markets$id %in% betID,
-              "contract_name"][1]=="Democratic") {
+  if (markets[markets$id %in% betID, "contract_name"][1]=="Democratic") {
     d$Democratic <- markets[markets$id %in% betID, "lastTradePrice"][1]
-  } else if (markets[markets$id %in% betID,
-                     "contract_name"][2]=="Democratic") {
+  } else if (markets[markets$id %in% betID, "contract_name"][2]=="Democratic") {
     d$Democratic <- markets[markets$id %in% betID, "lastTradePrice"][2]
   } else {
     d$Democratic <- 0
@@ -80,11 +78,9 @@ getDemProb <- function(betID) {
 }
 
 getRepProb <- function(betID) {
-  if (markets[markets$id %in% betID,
-              "contract_name"][1]=="Republican") {
+  if (markets[markets$id %in% betID, "contract_name"][1]=="Republican") {
     d$Republican <- markets[markets$id %in% betID, "lastTradePrice"][1]
-  } else if (markets[markets$id %in% betID,
-                     "contract_name"][2]=="Republican") {
+  } else if (markets[markets$id %in% betID, "contract_name"][2]=="Republican") {
     d$Republican <- markets[markets$id %in% betID, "lastTradePrice"][2]
   } else {
     d$Republican <- 0
@@ -110,8 +106,7 @@ d$demProb <- sapply(d$ID, getDemProb)
 d$repProb <- sapply(d$ID, getRepProb)
 d$demProbScaled <- d$demProb/(d$demProb+d$repProb)
 d$repProbScaled <- 1-d$demProbScaled
-d$impliedDemPoll <- sapply(d$demProbScaled,
-                           getImpliedDemProb)
+d$impliedDemPoll <- sapply(d$demProbScaled, getImpliedDemProb)
 
 nTrials <- 1e5
 zs <- matrix(rnorm(n=nrow(d)*nTrials, mean=0, sd=1),
@@ -129,21 +124,14 @@ popNE <- sum(d[d$State %in% c("NE01","NE02","NE03"), "Population"])
 
 # Assign each of Maine's and Nebraska's remaining two
 # electoral votes to candidate with highest vote state-wide
-results <- results + 2*(colSums(dvotes[which(d$State %in% c("ME01",
-                                                            "ME02")),
-                                       ])>(0.5*popME))
+results <- results + 2*(colSums(dvotes[which(d$State %in% c("ME01", "ME02")), ])>(0.5*popME))
 
-results <- results + 2*(colSums(dvotes[which(d$State %in% c("NE01",
-                                                            "NE02",
-                                                            "NE03")),
-                                       ])>(0.5*popNE))
+results <- results + 2*(colSums(dvotes[which(d$State %in% c("NE01","NE02","NE03")), ])>(0.5*popNE))
 
 # Plot results
 hist(results, col="gray", border=F,
-     main=paste("Expected Democratic electoral votes",
-                "given", nTrials, "trials\n",
-                "Democratic win probability:",
-                round(sum(results>=270)/nTrials,3),"\n",
+     main=paste("Expected Democratic electoral votes given", nTrials, "trials\n",
+                "Democratic win probability:", round(sum(results>=270)/nTrials,3),"\n",
                 "Median Democratic electoral votes:", median(results)),
      xlab=paste("Democratic electoral votes\n",
                 "(run", format(Sys.time(), "%a %b %d %Y %X"), "UTC)"),
