@@ -128,7 +128,6 @@ popNE <- sum(d[d$State %in% c("NE01","NE02","NE03"), "Population"])
 # Assign each of Maine's and Nebraska's remaining two
 # electoral votes to candidate with highest vote state-wide
 results <- results + 2*(colSums(dvotes[which(d$State %in% c("ME01", "ME02")), ])>(0.5*popME))
-
 results <- results + 2*(colSums(dvotes[which(d$State %in% c("NE01","NE02","NE03")), ])>(0.5*popNE))
 
 # Plot results
