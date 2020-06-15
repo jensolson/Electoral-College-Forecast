@@ -7,8 +7,7 @@ set.seed(5)
 # Comment the line below once 'markets' variable has been stored to run additional analysis
 markets <- data.frame(all_markets())
 
-# Store variables, PredictIt IDs,
-# electoral votes, and population
+# Store variables, PredictIt IDs, electoral votes, and population
 d <- data.frame(rbind(c('AZ', 5596, 11, 7.279),
                       c('PA', 5543, 20, 12.802),
                       c('MI', 5545, 16, 9.987),
@@ -94,8 +93,7 @@ getRepProb <- function(betID) {
 x <- seq(from=.01, to=.99, length.out=1e5)
 
 # Set standard deviation to generate polling
-# .08 gets close to results at
-# https://www.nytimes.com/elections/2016/results/president
+# .08 gets close to results at https://www.nytimes.com/elections/2016/results/president
 probSD <- .08
 
 # Calculate implied polling from PredictIt win probs
