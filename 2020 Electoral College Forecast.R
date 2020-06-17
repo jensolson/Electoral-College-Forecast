@@ -1,6 +1,6 @@
 library(rpredictit)
 library(data.table)
-# library(dplyr)
+library(dplyr)
 library(ggplot2)
 set.seed(2)
 
@@ -100,6 +100,7 @@ getImpliedDemPoll <- function(demWinProb) {
 # Calculate implied Dem polling from prediction market probabilities
 d[, impliedDemPoll := sapply(dProbScaled, getImpliedDemPoll)]
 
+# Run hypothetical elections
 nTrials <- 5*1e3
 zs <- matrix(rnorm(n=nrow(d)*nTrials, mean=0, sd=1),
              nrow(d), nTrials)
@@ -107,7 +108,6 @@ zs <- matrix(rnorm(n=nrow(d)*nTrials, mean=0, sd=1),
 # Polling standard deviation/margin of error
 pollingSD <- .08
 
-# Run hypothetical elections
 demVotePct <- d[, impliedDemPoll]+zs*pollingSD
 demWin <- demVotePct > 0.5
 demVotes <- (d$Population*d$Turnout) %*% demVotePct
