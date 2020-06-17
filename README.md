@@ -9,5 +9,7 @@ Results are sensitive to
 * 'probSD': estimated standard deviation of polling forecasts derived from betting market win probabilities. Current value of .08 plugged to get reasonably close to current state polling numbers
 * 'pollingSD': given expected state-level mean polling figures derived above, estimate the standard deviation around that estimate to simulate 100,000 ('nTrials') elections
 
-![Democratic electoral vote outcomes](https://github.com/jensolson/Electoral-College-Forecast/blob/master/EV%20forecast.png)
+![Democratic electoral vote outcomes](scatter.png)
+
+![Democratic electoral vote outcomes](scatter2.png)
 
