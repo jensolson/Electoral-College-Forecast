@@ -101,7 +101,7 @@ getImpliedDemPoll <- function(demWinProb) {
 d[, impliedDemPoll := sapply(dProbScaled, getImpliedDemPoll)]
 
 # Run hypothetical elections
-nTrials <- 5*1e3
+nTrials <- 1e4
 zs <- matrix(rnorm(n=d[,.N]*nTrials, mean=0, sd=1), d[,.N], nTrials)
 
 # Polling standard deviation/margin of error
