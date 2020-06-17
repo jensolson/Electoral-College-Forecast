@@ -164,7 +164,7 @@ g <- ggplot(res, mapping=aes(x=popV, y=EVs, group=Q))+
   ggtitle(paste(nTrials, "simulated outcomes of the 2020 US Presidential election"),
           subtitle=paste("Dem probability of victory:", round(res[Q %in% c(1,2),.N]/nTrials, 3),
                          "\nDems", round(res[Q==4,.N]/res[Q==2,.N], 1),
-                         "times as likely to win popular vote and lose Electoral College than Repubs")) +
+                         "times as likely to win popular vote and lose Electoral College as Repubs")) +
   guides(color=F) +
   xlab("Democratic share of popular vote") +
   ylab("Democratic votes in Electoral College") +
