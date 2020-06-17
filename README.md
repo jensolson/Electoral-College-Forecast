@@ -11,5 +11,5 @@ Results are sensitive to
 
 ![Democratic electoral vote outcomes](scatter.png)
 
-![Democratic electoral vote outcomes](scatter2.png)
+![Democratic electoral vote outcomes](scatter2.png) 
 
