@@ -1,7 +1,6 @@
 library(rpredictit)
 library(data.table)
 library(tibble)
-library(dplyr)
 library(ggplot2)
 set.seed(2)
 
