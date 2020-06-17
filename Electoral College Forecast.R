@@ -1,11 +1,12 @@
 library(rpredictit)
 library(data.table)
+library(tibble)
 library(dplyr)
 library(ggplot2)
 set.seed(2)
 
 # Uncomment to download current PredictIt market data
-markets <- data.table(all_markets())
+markets <- setDT(all_markets())
 
 # Store variables, PredictIt IDs,
 # electoral votes, population, and turnout rates
@@ -75,8 +76,8 @@ d[, (numericCols) := lapply(.SD, as.numeric), .SDcols=numericCols]
 m <- markets[id %in% d$ID & contract_name %in% c("Democratic", "Republican"),
              .(id, contract_name, lastTradePrice)]
 
-m <- dcast.data.table(m, id ~ contract_name, value.var="lastTradePrice")
-setnames(m, c('ID', 'dProb', 'rProb'))
+m <- dcast(m, id ~ contract_name, value.var="lastTradePrice")
+setnames(m, c("ID", "dProb", "rProb"))
 d <- merge(d, m, by='ID')
 
 d[, dProbScaled := dProb/(dProb+rProb)]
@@ -102,8 +103,7 @@ d[, impliedDemPoll := sapply(dProbScaled, getImpliedDemPoll)]
 
 # Run hypothetical elections
 nTrials <- 5*1e3
-zs <- matrix(rnorm(n=nrow(d)*nTrials, mean=0, sd=1),
-             nrow(d), nTrials)
+zs <- matrix(rnorm(n=d[,.N]*nTrials, mean=0, sd=1), d[,.N], nTrials)
 
 # Polling standard deviation/margin of error
 pollingSD <- .08
@@ -140,7 +140,8 @@ hist(demEVs, col="gray", border=F,
                 "Median Democratic electoral vote expectation:",
                 median(demEVs)),
      xlab=paste("Democratic electoral votes\n",
-                "(run", format(Sys.time(), "%a %b %d %Y %X"), "UTC)"),
+                "run", format(Sys.time(), tz="America/New_York", usetz=T,
+                              "%a %b %d %Y %X")),
      ylab="Frequency",
      breaks=25)
 
@@ -162,14 +163,15 @@ g <- ggplot(res, mapping=aes(x=popV, y=EVs, group=Q))+
   geom_vline(xintercept=.50) +
   geom_hline(yintercept=270) +
   ggtitle(paste(nTrials, "simulated outcomes of the 2020 US Presidential election"),
-          subtitle=paste("Dem probability of victory:", round(nrow(res[Q %in% c(1,2)])/nTrials, 3),
-                         "\nDems", round(nrow(res[Q==4])/nrow(res[Q==2]), 1),
+          subtitle=paste("Dem probability of victory:", round(res[Q %in% c(1,2),.N]/nTrials, 3),
+                         "\nDems", round(res[Q==4,.N]/res[Q==2,.N], 1),
                          "times as likely to win popular vote and lose Electoral College than Repubs")) +
   guides(color=F) +
   xlab("Democratic share of popular vote") +
   ylab("Democratic votes in Electoral College") +
   labs(caption=paste("Based on PredictIt state-level election betting markets\n",
-                     "as of", format(Sys.time(), "%a %b %d %Y %X"), "UTC")) +
+                     "as of", format(Sys.time(), tz="America/New_York", usetz=T,
+                                     "%a %b %d %Y %X"))) +
   scale_color_manual(breaks=c(1, 2, 3, 4),
                      values=plotColors) +
   scale_x_continuous(labels=scales::percent, breaks=seq(from=.40,to=.70,by=.02)) +
@@ -189,4 +191,3 @@ g <- ggplot(res, mapping=aes(x=popV, y=EVs, group=Q))+
   theme_minimal()
 
 print(g)
-
