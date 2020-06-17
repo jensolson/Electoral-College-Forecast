@@ -168,6 +168,8 @@ g <- ggplot(res, mapping=aes(x=popV, y=EVs, group=Q))+
   guides(color=F) +
   xlab("Democratic share of popular vote") +
   ylab("Democratic votes in Electoral College") +
+  labs(caption=paste("Based on PredictIt state-level election betting markets\n",
+                     "as of", format(Sys.time(), "%a %b %d %Y %X"), "UTC")) +
   scale_color_manual(breaks=c(1, 2, 3, 4),
                      values=plotColors) +
   scale_x_continuous(labels=scales::percent, breaks=seq(from=.40,to=.70,by=.02)) +
