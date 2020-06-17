@@ -174,13 +174,13 @@ g <- ggplot(res, mapping=aes(x=popV, y=EVs, group=Q))+
                      values=plotColors) +
   scale_x_continuous(labels=scales::percent, breaks=seq(from=.40,to=.70,by=.02)) +
   scale_y_continuous(breaks=c(150,200,250,270,300,350,400,450)) +
-  annotate(geom="text", x=.52, y=max(res[,EVs])-15,
+  annotate(geom="text", x=.53, y=max(res[,EVs])-15,
            label="Dems win popular vote\n & Electoral College",
            color=plotColors[1]) +
-  annotate(geom="text", x=min(res[,popV])+.01, y=325,
+  annotate(geom="text", x=min(res[,popV])+.015, y=325,
            label="Repubs win\n popular vote but lose\n Electoral College",
            color=plotColors[2]) +
-  annotate(geom="text", x=min(res[,popV])+.01, y=210,
+  annotate(geom="text", x=min(res[,popV])+.015, y=210,
            label="Repubs win\n popular vote &\n Electoral College",
            color=plotColors[3]) +
   annotate(geom="text", x=.535, y=min(res[,EVs])+25,
